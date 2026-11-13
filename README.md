@@ -12,7 +12,7 @@
 
 ![Quota Deck 浏览器页面与 Token 统计](docs/images/web-dashboard.png)
 
-截图中的额度和统计值为拍摄时的实际数据，不代表实时状态。
+截图展示了拍摄时的实际额度和统计数据。
 
 ## 功能
 
@@ -22,7 +22,7 @@
 - 展示 CPU、内存、NVIDIA GPU 和天气；支持中英文、定时深浅色主题及手动切换。
 - 提供局域网遥控页面，适合没有触摸屏、鼠标或键盘的 HDMI 小屏。
 
-额度读取依赖各客户端及其接口，接口或登录状态变化时可能无法获取数据。未知值会显示为未知，不会假设额度为 100%。
+额度读取依赖各客户端及其接口，未知额度会显示为未知。
 
 ## 浏览器运行
 
@@ -47,7 +47,7 @@ bash install-web-service.sh
 systemctl --user status quota-deck-web
 ```
 
-在另一台设备访问 `http://<主机IP>:18768/control/`，按照提示输入 `~/.config/quota-deck/remote-key` 中的访问密钥。该服务监听所有网络接口；远程 API 需要密钥，仍应只在可信网络中使用，避免将端口直接暴露到公网。明文 HTTP 不加密传输，跨不可信网络时请使用安全隧道。
+在另一台设备访问 `http://<主机IP>:18768/control/`，按照提示输入 `~/.config/quota-deck/remote-key` 中的访问密钥。该服务监听所有网络接口，远程 API 使用密钥认证。请在可信网络中使用；跨网络访问时使用安全隧道。
 
 卸载用户服务可手动禁用并删除 `~/.config/systemd/user/quota-deck-web.service`，然后执行 `systemctl --user daemon-reload`。
 
@@ -59,7 +59,7 @@ systemctl --user status quota-deck-web
 bash run-quota.sh
 ```
 
-启动器使用 sudo 创建临时 Xorg 会话，再以普通用户运行面板。需要 systemd 常驻服务时，可运行 `sudo bash install-service.sh`；运行前请阅读脚本，确认其适合你的显示环境。服务名为 `quota-deck`，卸载使用 `sudo bash install-service.sh uninstall`。
+启动器使用 sudo 创建临时 Xorg 会话，再以普通用户运行面板。运行 `sudo bash install-service.sh` 可安装 systemd 常驻服务 `quota-deck`；卸载使用 `sudo bash install-service.sh uninstall`。
 
 ## 远程主机
 
@@ -69,12 +69,12 @@ bash run-quota.sh
 [{"name": "Laptop", "ssh": "user@your-host"}]
 ```
 
-远程主机需要 SSH 和 Python 3。远程数据采集使用当前用户已有的 SSH 配置，不要求把账户凭据复制到面板主机。务必只配置你信任且有权访问的主机。
+远程主机需要 SSH 和 Python 3。远程数据采集使用当前用户已有的 SSH 配置。
 
 ## 数据与隐私
 
-- 面板读取已有的 CLI 登录信息及会话日志，以获取额度、用量和任务状态；适配器可能调用供应商的额度接口。请先阅读 `providers.py`、`tokens.py` 和远程采集代码，确认其行为符合你的需要。
-- 历史统计存于 `~/.local/share/quota-deck/`，配置和遥控密钥存于 `~/.config/quota-deck/`，缓存存于 `~/.cache/quota-deck/`。这些文件不属于源码仓库。
+- 面板读取已有的 CLI 登录信息及会话日志，以获取额度、用量和任务状态；适配器通过供应商的额度接口获取数据。
+- 历史统计存于 `~/.local/share/quota-deck/`，配置和遥控密钥存于 `~/.config/quota-deck/`，缓存存于 `~/.cache/quota-deck/`。
 - 截图、日志和配置可能包含账号、主机名或用量等私人数据；公开分享前请检查并遮挡。
 
 ## 开发与验证
@@ -90,4 +90,4 @@ node --test test_theme.mjs test_i18n.mjs test_reset_signals.mjs
 
 ## 许可与第三方资源
 
-项目代码以 [MIT License](LICENSE) 发布。字体 Inter 的许可证见 `public/fonts/Inter-LICENSE.txt`；品牌 SVG 来源及许可证见 `public/logos/`。各品牌和商标归其所有者所有。本项目与这些品牌无隶属关系。
+项目代码以 [MIT License](LICENSE) 发布。字体 Inter 的许可证见 `public/fonts/Inter-LICENSE.txt`；品牌 SVG 来源及许可证见 `public/logos/`。各品牌和商标归其所有者所有。
