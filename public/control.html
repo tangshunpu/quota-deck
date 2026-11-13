@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101113"><title>Quota Deck · 屏幕遥控</title>
+<link rel="icon" href="/favicon.svg"><script src="/theme.js"></script><script src="/i18n.js"></script><link rel="stylesheet" href="/control.css">
+</head>
+<body><main>
+<header><div><h1 data-i18n="屏幕遥控">屏幕遥控</h1><p data-i18n="Quota Deck · HDMI 额度面板">Quota Deck · HDMI 额度面板</p></div><div class="header-actions"><button id="language-toggle" class="quiet" aria-label="Switch to English">EN</button><a href="/" target="_blank" rel="noopener" data-i18n="查看仪表盘 ↗">查看仪表盘 ↗</a></div></header>
+<section id="login" hidden>
+<h2 data-i18n="连接你的屏幕">连接你的屏幕</h2><p data-i18n="使用专用访问链接，或输入该面板的访问密钥。">使用专用访问链接，或输入该面板的访问密钥。</p>
+<form id="login-form"><label for="key" data-i18n="访问密钥">访问密钥</label><input id="key" type="password" autocomplete="current-password" required><button type="submit" data-i18n="连接面板">连接面板</button></form>
+</section>
+<div id="controls" hidden>
+<div class="connection" role="status"><span id="status-dot" class="dot"></span><div><strong id="connection-text">正在连接屏幕…</strong><p id="connection-note">正在读取屏幕状态</p></div></div>
+<section><div class="section-heading"><h2 data-i18n="屏幕外观">屏幕外观</h2><span id="current-theme">—</span></div>
+<div class="themes" role="group" aria-label="屏幕颜色模式" data-i18n-aria="屏幕颜色模式">
+<button data-mode="auto"><span>◐</span><b data-i18n="自动">自动</b></button><button data-mode="dark"><span>☾</span><b data-i18n="深色">深色</b></button><button data-mode="light"><span>☀</span><b data-i18n="浅色">浅色</b></button>
+</div><p class="hint" id="schedule-note">每天 18:00–次日 07:00 深色，其余时间浅色。按屏幕本机时间。</p>
+</section>
+<section><h2 data-i18n="界面语言">界面语言</h2><div class="languages" role="group" aria-label="界面语言" data-i18n-aria="界面语言"><button data-language="zh" lang="zh-CN">中文</button><button data-language="en" lang="en">English</button></div><p class="hint" data-i18n="同步切换实体屏和遥控页，自动保存。">同步切换实体屏和遥控页，自动保存。</p></section>
+<section><div class="section-heading"><h2 data-i18n="卡片详情">卡片详情</h2><button id="overview" class="quiet" data-i18n="全部返回仪表">全部返回仪表</button></div>
+<div class="provider-control"><div><strong>Codex</strong><span data-i18n="输入、缓存、输出与同步状态">输入、缓存、输出与同步状态</span></div><button data-provider="codex" aria-pressed="false" data-i18n="打开详情">打开详情</button></div>
+<div class="provider-control"><div><strong>Grok</strong><span data-i18n="输入、缓存、输出与同步状态">输入、缓存、输出与同步状态</span></div><button data-provider="grok" aria-pressed="false" data-i18n="打开详情">打开详情</button></div>
+<div class="provider-control"><div><strong>Claude</strong><span data-i18n="输入、缓存、输出与同步状态">输入、缓存、输出与同步状态</span></div><button data-provider="claude" aria-pressed="false" data-i18n="打开详情">打开详情</button></div>
+</section>
+<section><h2 data-i18n="快捷操作">快捷操作</h2><div class="actions"><button id="refresh" data-i18n="刷新账户额度">刷新账户额度</button><button id="reload" data-i18n="重新加载屏幕页面">重新加载屏幕页面</button></div><p class="hint" data-i18n="额度查询保留 60 秒间隔；重载页面不会退出面板。">额度查询保留 60 秒间隔；重载页面不会退出面板。</p></section>
+<section><div class="section-heading"><h2 data-i18n="提醒预览">提醒预览</h2><select id="alert-provider" aria-label="预览服务" data-i18n-aria="预览服务"><option value="codex">Codex</option><option value="grok">Grok</option><option value="claude">Claude</option></select></div><div class="actions"><button data-preview="completed" data-i18n="预览完成提醒">预览完成提醒</button><button data-preview="waiting" data-i18n="预览等待输入">预览等待输入</button><button data-preview="reset" data-i18n="预览额度重置">预览额度重置</button></div><p class="hint" data-i18n="提醒预览演示 15 秒，额度重置约 5 秒；真实等待在回复、继续执行或取消后解除，最长显示 30 分钟。">提醒预览演示 15 秒，额度重置约 5 秒；真实等待在回复、继续执行或取消后解除，最长显示 30 分钟。</p></section>
+</div>
+<p id="feedback" role="status" aria-live="polite"></p>
+</main><script src="/control.js"></script></body></html>

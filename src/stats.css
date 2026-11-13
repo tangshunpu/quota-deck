@@ -1,0 +1,165 @@
+/* Browser view only. The HDMI kiosk (native WebKit) never gets the .web class or the statistics,
+   so its 1024×600 layout stays exactly as before. */
+@media(min-width:701px){
+ /* Show the dashboard as a scaled 1024×600 panel so the statistics are visible below it. */
+ :root.web{font-size:max(10px,calc(min(100vw - 40px,1080px,68vh * 1.7067) / 64))}
+ .web .deck{width:64rem;height:37.5rem;min-height:0;margin:.6rem auto 0}
+}
+@media(max-width:700px){
+ .web .gauge{height:12.5rem}
+}
+
+/* Statistics use em, with a floor, so charts stay legible when the scaled dashboard is small. */
+.stats{width:min(64rem,100%);margin:0 auto;padding:.5rem .9rem 3rem;font-size:max(14px,1rem);color:var(--text);
+ --grid:color-mix(in srgb,var(--border) 65%,var(--card));--heat-zero:var(--track)}
+:root[data-theme="dark"] .stats{--grid:#3A414C;--heat-zero:#30353D}
+.stats h2,.stats h3,.stats p{margin:0}
+.stats button,.stats select{font:inherit;color:inherit}
+.stats-head{display:flex;flex-direction:column;gap:.3em;margin:.6em .2em 1em}
+.stats-head h2{font-size:1.3em;font-weight:700;letter-spacing:-.01em}
+.stats-head p,.footnote{font-size:.78em;line-height:1.55;color:var(--text-2)}
+
+.stats-filters{display:flex;flex-wrap:wrap;align-items:center;gap:.6em 1em;margin:0 .2em 1em}
+.segmented{display:inline-flex;padding:.2em;gap:.15em;border-radius:99px;background:var(--panel);border:1px solid var(--border)}
+.segmented button{display:inline-flex;align-items:center;gap:.4em;min-height:2.3em;padding:0 .95em;border-radius:99px;font-size:.85em;font-weight:550;color:var(--text-2)}
+.segmented button:hover{color:var(--text)}
+.segmented button[aria-pressed="true"]{background:var(--card);color:var(--text);font-weight:650;box-shadow:0 1px 3px rgba(0,0,0,.12),inset 0 0 0 1px var(--border)}
+.host-filter{display:inline-flex;align-items:center;gap:.5em;font-size:.85em;color:var(--text-2)}
+.host-filter select{min-height:2.6em;padding:0 2em 0 .9em;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:1em;
+ appearance:none;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);
+ background-position:calc(100% - 1.05em) 52%,calc(100% - .75em) 52%;background-size:.3em .3em;background-repeat:no-repeat}
+.stats :is(button,select,summary,a):focus-visible{outline:2px solid var(--codex);outline-offset:2px}
+.stats-sync{font-size:.78em;color:var(--text-2)}
+.stats-warning{margin:-.3em .2em 1em;font-size:.8em;color:var(--warn-text)}
+
+.stats-body{display:flex;flex-direction:column;gap:.8rem;transition:opacity .2s}
+.stats-body.is-pending{opacity:.6}
+.stats-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+.stats-card{min-width:0;background:var(--card);border:1px solid var(--border);border-radius:1.4rem;box-shadow:var(--shadow);padding:1.1em 1.2em 1em}
+.stats-card-head{display:flex;justify-content:space-between;align-items:baseline;gap:.8em;margin-bottom:.7em}
+.stats-card-head h3{font-size:1em;font-weight:650}
+.stats-card-head span{font-size:.78em;color:var(--text-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+.stats-card.is-pending .heat-frame,.stats-card.is-pending .tiles{opacity:.6;transition:opacity .2s}
+.heat-head{align-items:center;flex-wrap:wrap}
+.heat-head>div:first-child{display:flex;flex-direction:column;gap:.2em}
+.year-picker button{min-height:2em;padding:0 .8em;font-size:.8em;font-variant-numeric:tabular-nums}
+.stats-message{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1em;padding:1.4em}
+.stats-message p{font-size:.9em;color:var(--text-mid)}
+.stats-message a{font-size:.9em;font-weight:600;color:var(--codex);text-decoration:none}
+
+.hero{display:flex;align-items:baseline;flex-wrap:wrap;gap:.2em .6em}
+.hero strong{font-size:2.3em;font-weight:700;letter-spacing:-.03em;line-height:1.05}
+.hero span{font-size:.78em;color:var(--text-2)}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5em;margin:.9em 0 0}
+.tiles.inline{grid-template-columns:repeat(4,minmax(0,1fr));margin:0 0 1em}
+.tiles>div{background:var(--panel);border-radius:.8em;padding:.55em .75em;min-width:0}
+.tiles dt{font-size:.74em;line-height:1.3;color:var(--text-2)}
+.tiles dd{margin:.15em 0 0;font-size:1.1em;font-weight:650;white-space:nowrap}
+.tiles dd small{margin-left:.35em;font-size:.68em;font-weight:500;color:var(--text-2)}
+.mix{display:flex;flex-wrap:wrap;gap:.25em 1.1em;margin-top:.8em;font-size:.8em;color:var(--text-2)}
+.mix b{font-weight:650;color:var(--text)}
+.mix small{font-size:.92em}
+
+.legend{margin-top:.85em}
+.share{display:flex;gap:2px;height:.45em;border-radius:99px;overflow:hidden;background:var(--track)}
+.share i{display:block;min-width:2px}
+.legend ul{display:flex;flex-wrap:wrap;gap:.3em 1.2em;margin:.55em 0 0;padding:0;list-style:none;font-size:.8em}
+.legend li{display:flex;align-items:center;gap:.4em;white-space:nowrap}
+.legend li span{color:var(--text-mid)}
+.legend li b{font-weight:650}
+.legend li small{color:var(--text-2)}
+.swatch{display:inline-block;width:.75em;height:.75em;border-radius:.2em;flex-shrink:0}
+.swatch-codex,.key-codex{background:var(--codex)}
+.swatch-grok,.key-grok{background:var(--grok)}
+.swatch-claude,.key-claude{background:var(--claude)}
+
+/* Charts: thin marks, hairline solid grid, text in text colours. */
+.columns{position:relative;margin-top:.9em}
+.columns svg,.heatmap{display:block;overflow:visible;touch-action:pan-y}
+.axis line{stroke:var(--grid);stroke-width:1}
+.axis .baseline line{stroke:var(--border)}
+.axis text,.columns .tick,.heatmap .tick{font-size:.68em;fill:var(--text-2);font-variant-numeric:tabular-nums}
+.columns .current .tick{fill:var(--text);font-weight:650}
+.columns .tick.sub{font-size:.62em}
+.columns .peak{font-size:.7em;font-weight:650;fill:var(--text)}
+.fill-codex{fill:var(--codex)}
+.fill-grok{fill:var(--grok)}
+.fill-claude{fill:var(--claude)}
+.partial path{opacity:.5}
+.wash{fill:transparent}
+.wash.on{fill:var(--panel)}
+.no-data{fill:none;stroke:var(--text-2);stroke-width:1.2;opacity:.7}
+.hit{fill:transparent;cursor:crosshair}
+.split{display:grid;grid-template-columns:minmax(15em,22em) minmax(0,1fr);gap:1.4em;align-items:end}
+.split-side .tiles{grid-template-columns:repeat(3,minmax(0,1fr))}
+.split .columns{margin-top:0}
+.footnote{margin-top:.4em}
+
+/* Heatmap: a soft teal between GitHub green and Codex blue, so the all-services view reads apart
+   from every provider. Four OKLCH lightness steps (ΔL ≈ 0.10), light to mid on light cards and dark
+   to bright on dark cards; the deepest step stays mid-tone. A selected provider keeps its own hue. */
+.heat-all{--h1:#A8EBDB;--h2:#58D3BA;--h3:#00B39A;--h4:#0A8E7A}
+.heat-codex{--h1:#C2DEFE;--h2:#86BFFF;--h3:#539DED;--h4:#357DC7}
+.heat-claude{--h1:#FAD2B1;--h2:#EBAB74;--h3:#D1863E;--h4:#AC671D}
+.heat-grok{--h1:#DBDBDB;--h2:#BABABA;--h3:#9A9A9A;--h4:#7A7A7A}
+:root[data-theme="dark"] .heat-all{--h1:#004E42;--h2:#047766;--h3:#0CA68F;--h4:#43D9BE}
+:root[data-theme="dark"] .heat-codex{--h1:#254466;--h2:#3568A0;--h3:#4F93DC;--h4:#8DC2FE}
+:root[data-theme="dark"] .heat-claude{--h1:#5A3A1C;--h2:#8C5826;--h3:#C27D3C;--h4:#F4AC6B}
+:root[data-theme="dark"] .heat-grok{--h1:#424242;--h2:#666666;--h3:#8F8F8F;--h4:#BEBEBE}
+.heatmap .l0,.heat-legend .l0{--c:var(--heat-zero)}
+.heatmap .l1,.heat-legend .l1{--c:var(--h1)}
+.heatmap .l2,.heat-legend .l2{--c:var(--h2)}
+.heatmap .l3,.heat-legend .l3{--c:var(--h3)}
+.heatmap .l4,.heat-legend .l4{--c:var(--h4)}
+.heatmap .cell{fill:var(--c);cursor:crosshair}
+.heatmap .cell.empty{fill:transparent;stroke:var(--grid);stroke-width:1}
+.heatmap .cell.is-today{stroke:var(--text-2);stroke-width:1.5}
+.heatmap .cell.on{stroke:var(--text);stroke-width:1.5}
+.heat-frame{display:flex;min-width:0}
+.heat-days{flex-shrink:0}
+.heat-scroll{min-width:0;overflow-x:auto;padding:0 1px .3em;scrollbar-width:thin}
+.heat-legend{display:flex;flex-wrap:wrap;align-items:center;gap:.35em 1em;margin-top:.6em;font-size:.76em;color:var(--text-2);font-variant-numeric:tabular-nums}
+.heat-key{display:inline-flex;align-items:center;gap:.4em;white-space:nowrap}
+.heat-legend i{display:inline-block;width:.95em;height:.95em;border-radius:.2em;background:var(--c)}
+.heat-legend i.empty{background:none;box-shadow:inset 0 0 0 1px var(--grid)}
+.heat-legend small{margin-left:auto;font-size:.95em}
+
+.data-table{margin-top:.7em;font-size:.82em}
+.data-table summary{width:max-content;cursor:pointer;color:var(--text-2);padding:.2em 0}
+.data-table summary:hover{color:var(--text)}
+.table-scroll{overflow-x:auto;margin-top:.5em}
+.stats-pair .table-scroll{height:180px;overflow:auto;scrollbar-width:thin}
+.stats-pair .data-table thead th{position:sticky;top:0;z-index:1;background:var(--card)}
+.data-table table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;white-space:nowrap}
+.data-table th,.data-table td{padding:.38em .6em;text-align:right;border-bottom:1px solid var(--grid)}
+.data-table :is(thead th,tbody th){text-align:left;font-weight:550}
+.data-table thead th{color:var(--text-2);font-weight:500;text-align:right}
+.data-table thead th:first-child{text-align:left}
+.data-table tbody td:last-child{font-weight:650}
+.data-table tr.empty td,.data-table tr.empty th{color:var(--text-2);font-weight:400}
+
+.stats-tip{position:fixed;z-index:20;pointer-events:none;min-width:9em;max-width:min(20em,calc(100vw - 16px));padding:.6em .75em;border-radius:.75em;
+ background:var(--card);border:1px solid var(--border);box-shadow:0 8px 24px rgba(0,0,0,.14);font-size:max(13px,.82rem);color:var(--text)}
+.tip-title{display:flex;flex-direction:column;font-weight:650;margin-bottom:.35em}
+.tip-title span{font-size:.85em;font-weight:500;color:var(--warn-text)}
+.tip-row{display:flex;align-items:center;gap:.45em;line-height:1.6}
+.tip-row b{font-weight:700;font-variant-numeric:tabular-nums}
+.tip-row span{color:var(--text-2)}
+.key{width:.8em;height:2px;border-radius:1px;flex-shrink:0}
+.tip-total{margin-top:.15em}
+.tip-row+.tip-total{border-top:1px solid var(--grid);padding-top:.2em}
+.tip-mix{margin-top:.3em;font-size:.85em;color:var(--text-2)}
+.tip-empty{color:var(--text-2)}
+
+@media(max-width:860px){
+ .split{grid-template-columns:1fr;align-items:stretch}
+ .tiles.inline{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){
+ .stats{padding:.2rem 1rem 2.5rem}
+ .stats-pair{grid-template-columns:1fr}
+ .stats-card{padding:1em}
+ .segmented button{min-height:2.9em;padding:0 .8em}
+ .host-filter select{min-height:2.9em}
+ .heat-legend small{margin-left:0;flex-basis:100%}
+}

@@ -1,0 +1,10 @@
+Codex, Grok and Claude SVG brand marks from Lobe Icons:
+https://github.com/lobehub/lobe-icons/tree/master/packages/static-svg/icons
+https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/codex.svg
+https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/grok.svg
+https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/claude.svg
+SVG geometry is unchanged; CSS masks apply the dashboard's provider accent colors.
+All brand trademarks belong to their respective owners.
+OpenAI and xAI marks (used for the Codex and Grok cards):
+https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/openai.svg
+https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/xai.svg
